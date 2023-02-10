@@ -76,7 +76,7 @@ class DataTypeTesting {
     System.out.println("Customer gender = " + gender);
     System.out.println("Customer Minimum balance = " + minBal);
     System.out.println("Customer Account Balance = " + bal);
-    System.out.println("Customer
+    System.out.println("Customer Customer ID = " + custID);
 
 
   public void display() {
