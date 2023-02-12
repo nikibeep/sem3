@@ -108,7 +108,7 @@ public class DataTypeTesting {
 					break;
 				case 2:
 					for (byte i = 0; i < 3; i++) {
-						obj[i].disp();
+						obj[i].disp(); // calling member function
 					}
 					break;
 				case 3:
