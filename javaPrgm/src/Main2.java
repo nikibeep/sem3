@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
@@ -81,17 +82,6 @@ class DataTypeTesting {
     System.out.println("Customer Minimum balance = " + minBal);
     System.out.println("Customer Account Balance = " + bal);
     System.out.println("Customer Customer ID = " + custID);
-
-
-  public void display() {
-    System.out.println("Customer name = " + name);
-    System.out.println("Customer age = " + age);
-    System.out.println("Customer Account number = " + accNo);
-    System.out.println("Customer gender = " + gender);
-    System.out.println("Customer Minimum balance = " + minBal);
-    System.out.println("Customer Account Balance = " + bal);
-    System.out.println("Customer Customer ID = " + custID);
-    System.out.println("Customer PAN = " + pan);
   }
 }
 
