@@ -1,0 +1,1 @@
+Entities: Drugs,Companies,Researchers,Clinical Trials,Regulatory Bodi,Manufacturers,Distributors,Sales Representatives,Healthcare Providers Attributes: Drug Name,Dosage,Active Ingredient,Indication,Administration Route,Approval Status,Manufacturer Name,Price,Availability,Clinical Trial Results

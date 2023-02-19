@@ -1,176 +1,132 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 class Customer {
-   		// data members
-   		String name;
-   		byte age;
-    	long acc;
-    	char gender;
-    	short minbal;
-    	float bal;
-   		boolean pan;
-		// default constructor
-		public Customer() {
-			name = "";
-        	age = 0;
-        	acc = 0;
-        	gender = ' ';
-        	minbal = 0;
-        	bal = 0;
-        	pan = false;
-    	}
+  private String name;
+  private int age;
+  private long acc;
+  private char gender;
+  private float minbal;
+  private float bal;
+  private String pan;
 
-    	public Customer(String name) {
-        	this.name = name;
-   	 	}
+  // default constructor
+  public Customer() {}
 
-    	public Customer(String name, long acc) {
-        	this(name);
-        	this.acc = acc;
-    	}
+  // constructor to initialize name, age, acc, gender, minbal, bal, and pan
+  public Customer(String name, int age, long acc, char gender, float minbal, float bal, String pan) {
+    this.name = name;
+    this.age = age;
+    this.acc = acc;
+    this.gender = gender;
+    this.minbal = minbal;
+    this.bal = bal;
+    this.pan = pan;
+  }
 
-    	// member function
-    	public void read() throws IOException {
-        	InputStreamReader isr = new InputStreamReader(System.in);
-        	BufferedReader br = new BufferedReader(isr);
-       		try (Scanner scan = new Scanner(System.in)) {
+  // constructor to initialize name, age, and acc
+  public Customer(String name, int age, long acc) {
+    this.name = name;
+    this.age = age;
+    this.acc = acc;
+  }
 
-        	System.out.println("Enter the customer name:");
-        	name = br.readLine();
-       		System.out.println("Enter the customer age:");
-        	age = Byte.parseByte(br.readLine());
-        	System.out.println("Enter the account number:");
-        	acc = Long.parseLong(br.readLine());
-        	System.out.println("Enter the minimum balance:");
-        	minbal = Short.parseShort(br.readLine());
-        	System.out.println("Enter the balance amount:");
-        	bal = Float.parseFloat(br.readLine());
-        	System.out.println("Enter the customer gender:");
-        	gender = (char) br.read();
-        	System.out.println("Do you have Pan Card:");
-        	pan = Boolean.parseBoolean(br.readLine());
-			}
-    	}
+  // method to read data for a customer
+  public void readData() {
+    Scanner scan = new Scanner(System.in);
+    System.out.print("Enter name: ");
+    name = scan.nextLine();
+    System.out.print("Enter age: ");
+    age = Integer.parseInt(scan.nextLine());
+    System.out.print("Enter account number: ");
+    acc = Long.parseLong(scan.nextLine());
+    System.out.print("Enter gender (M/F): ");
+    gender = scan.nextLine().charAt(0);
+    System.out.print("Enter minimum balance: ");
+    minbal = Float.parseFloat(scan.nextLine());
+    System.out.print("Enter current balance: ");
+    bal = Float.parseFloat(scan.nextLine());
+    System.out.print("Enter PAN number: ");
+    pan = scan.nextLine();
+  }
 
-    	public void disp() {
-        	System.out.println("Customer Name: " + name);
-        	System.out.println("Customer Age: " + age);
-        	System.out.println("Account Number: " + acc);
-        	System.out.println("Gender: " + gender);
-        	System.out.println("PAN: " + pan);
-    	}
+  // method to display data for a customer
+  public void displayData() {
+    System.out.println("Name: " + name);
+    System.out.println("Age: " + age);
+    System.out.println("Account number: " + acc);
+    System.out.println("Gender: " + gender);
+    System.out.println("Minimum balance: " + minbal);
+    System.out.println("Current balance: " + bal);
+    System.out.println("PAN number: " + pan);
+  }
 
-    	public boolean search(String csname) {
-        	boolean f = false;
-        	if (name.equals(csname)) {
-            	f = true;
-       		}
-        	return f;
-    	}
+  // method to search for a customer by name
+  public Customer searchByName(String name, Customer[] cust) {
+    for (int i = 0; i < cust.length; i++) {
+      if (cust[i].name.equals(name)) {
+        return cust[i];
+      }
+    }
+    return null;
+  }
 
-    	public boolean search(long accNo) {
-        	boolean f = false;
-       	 	if (acc == accNo) {
-            f = true;
-        	}
-        	return f;
-    	}
+  // method to search for a customer by account number
+  public Customer searchByAcc(long acc, Customer[] cust) {
+    for (int i = 0; i < cust.length; i++) {
+      if (cust[i].acc == acc) {
+        return cust[i].getAcc();
+}
+}
+}
+return -1;
 }
 
-public class DataTypeTesting {
-	private static int res1;
+public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    System.out.println("Enter number of customers: ");
+    int n = Integer.parseInt(br.readLine());
+    Customer[] cust = new Customer[n];
 
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
-	public static void main(String[] args) throws IOException {
-		InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(isr);
-        boolean ch = true;
-        byte res, b1, temp = 0;
-        String sname;
-        Customer[] obj = new Customer[3];
-    	while (ch) {
-            	System.out.println("1. Read data");
-            System.out.println("2. Display data");
-            System.out.println("3. Search");
-            System.out.println("4. Exit");
-			System.out.println("Enter your choice:");
-			res = Byte.parseByte(br.readLine());
-			switch (res) {
-				case 1:
-					for (byte i = 0; i < 3; i++) {
-						obj[i] = new Customer();
-						obj[i].read();
-					}
-					break;
-				case 2:
-					for (byte i = 0; i < 3; i++) {
-						obj[i].disp(); // calling member function
-					}
-					break;
-				case 3:
-					System.out.println("1.Search by Name");
-					System.out.println("2.Search by account no.");
-					res1 = Byte.parseByte(br.readLine());
-					switch (res1) {
-						case 1:
-							System.out.println("Enter the name to search:");
-							sname = br.readLine();
-							for (byte i = 0; i < 3; i++) {
-								if (obj[i].search(sname) == true) {
-									obj[i].disp();
-									break;
-								}
-							}
-							break;
-						case 2:
-							System.out.println("Enter the Account No. to search:");
-							b1 = Byte.parseByte(br.readLine());
-							for (byte i = 0; i < 3; i++) {
-								if (obj[i].search(b1) == true) {
-									obj[i].disp();
-									break;
-								}
-							}
-							break;
-								case 3:
-									System.out.println("1.Search by Name");
-									System.out.println("2.Search by account no.");
-									res1 = Byte.parseByte(br.readLine());
-									switch (res1) {
-										case 1:
-											System.out.println("Enter the name to be searched:");
-											sname = br.readLine();
-											for (byte i = 0; i < 3; i++) {
-												if (obj[i].search(sname) == true) {
-													temp = 1;
-													obj[i].disp();
-												}
-											}
-											if (temp == 0) {
-												extracted();
-											}
-											break;
-										default:
-											System.out.println("Invalid choice");
-											break;
-									}
-				case 4:
-						ch = false;
-						break;
-							}
-					break;
-				default:
-					System.out.println("Invalid choice");
-					break;
-			}
-		}
-	}
-	private static void extracted() {
-		System.out.println("Record doesn't exist");
-	}
+    for (int i = 0; i < n; i++) {
+        System.out.println("Enter customer details (Name, Age, Gender, Account Number, PAN, Minimum Balance, Balance): ");
+        String line = br.readLine();
+        String[] details = line.split(",");
+        cust[i] = new Customer(details[0], Byte.parseByte(details[1]), details[2], Long.parseLong(details[3]), details[4], Float.parseFloat(details[5]), Float.parseFloat(details[6]));
+    }
+
+    System.out.println("Enter your choice: 1. Display all customer details 2. Search by name 3. Search by account number");
+    int choice = Integer.parseInt(br.readLine());
+
+    switch (choice) {
+        case 1:
+            displayAllCustomers(cust);
+            break;
+        case 2:
+            System.out.println("Enter name: ");
+            String name = br.readLine();
+            int acc = searchByName(cust, name);
+            if (acc != -1) {
+                System.out.println("Account number of customer " + name + " is " + acc);
+            } else {
+                System.out.println("Customer not found.");
+            }
+            break;
+        case 3:
+            System.out.println("Enter account number: ");
+            acc = Long.parseLong(br.readLine());
+            name = searchByAcc(cust, acc);
+            if (name != null) {
+                System.out.println("Name of customer with account number " + acc + " is " + name);
+            } else {
+                System.out.println("Customer not found.");
+            }
+            break;
+        default:
+            System.out.println("Invalid choice.");
+            break;
+    }
+}
 }
 
